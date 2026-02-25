@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohana Mahalakshmi | Portfolio</title>
+
+<style>
+    /* CERTIFICATE MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    z-index:2000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+}
+
+/* Image Responsive Fix */
+.modal img{
+    max-width:90%;
+    max-height:85vh;
+    border-radius:12px;
+    box-shadow:0 0 25px rgba(157,78,221,0.7);
+}
+
+/* Close Button */
+.close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:35px;
+    color:white;
+    cursor:pointer;
+}
+
+/* Mobile Optimization */
+@media(max-width:768px){
+    .modal img{
+        max-width:95%;
+        max-height:75vh;
+    }
+
+    .close{
+        font-size:28px;
+        right:15px;
+        top:10px;
+    }
+}
+    html, body{
+    overflow-x:hidden;
+}
+    
+section{
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+:root{
+    --bg-light:#0f0f1a;
+    --section-light:#1a1a2e;
+    --primary:#c77dff;
+    --accent:#9d4edd;
+    --text-dark:#f3e8ff;
+}
+#stars-canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at center, #23237b 0%, #050510 70%);
+    cursor: crosshair;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI', sans-serif;
+    scroll-behavior:smooth;
+    background:var(--bg-light);
+    color:var(--text-dark);
+    padding-top:80px;
+}
+    
+/* NAVIGATION */
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#141420;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+    padding:18px 0;
+    box-shadow:0 4px 12px rgba(0,0,0,0.4);
+    z-index:1000;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--primary);
+    font-weight:600;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:var(--accent);
+}
+
+.outer-box{
+    border:2px solid var(--primary);
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(157,78,221,0.4);
+}
+
+#home{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.home-box{
+    background:var(--section-light);
+    padding:50px;
+    border-radius:20px;
+}
+
+.profile-img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:20px;
+    border:4px solid var(--primary);
+}
+
+h1{
+    font-size:40px;
+    color:var(--primary);
+}
+
+h2{
+    font-size:28px;
+    margin-bottom:20px;
+    color:var(--primary);
+}
+
+.btn{
+    display:inline-block;
+    padding:10px 20px;
+    margin:10px;
+    background:var(--primary);
+    color:black;
+    border-radius:25px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:var(--accent);
+    transform:translateY(-3px);
+}
+
+section{
+    padding:80px 10%;
+    background:var(--section-light);
+    margin:40px 8%;
+    border-radius:20px;
+}
+
+.card {
+    position: relative;
+    background:#22223b;
+    padding:20px;
+    margin:15px 0;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(157,78,221,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(157,78,221,0.6);
+}
+
+.card::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    font-size: 14px;
+    z-index: 10;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent var(--accent) transparent;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card:hover::after,
+.card:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    background:#141420;
+    margin-top:40px;
+    color:var(--text-dark);
+}
+
+@media(max-width:768px){
+
+    nav{
+        gap:15px;
+        flex-wrap:wrap;
+        padding:15px;
+    }
+
+    #home{
+        padding:20px 10px;
+    }
+
+    .home-box{
+        width:100%;
+        padding:30px 20px;
+    }
+
+    section{
+        margin:20px auto;
+        padding:30px 15px;
+        width:95%;
+    }
+
+    h1{font-size:26px;}
+}
+body{
+    color: white;
+}
+
+a{
+    color: white;
+}
+
+</style>
+</head>
+
+<body>
+<canvas id="stars-canvas"></canvas>
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#education">Education</a>
+<a href="#skills">Skills</a>
+<a href="#tools">Tools</a>
+<a href="#projects">Projects</a>
+<a href="#experience">Experience</a>
+<a href="#certificates">Certificates</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div id="home">
+    <div class="home-box outer-box">
+        <img src="profile.jpg" alt="Mohana Mahalakshmi" class="profile-img">
+        <h1>Mohana Mahalakshmi S</h1>
+        <p><strong> web developer   </strong></p>
+
+        <a href="https://github.com/mohanamahalakshmi1125" target="_blank" class="btn">GitHub</a>
+
+        <a href="https://linkedin.com/in/mohana-mahalakshmi-s-0921133b0" target="_blank" class="btn">LinkedIn</a>
+<a href="./Mohana_Mahalakshmi_Resume_With_Border_And_Separation.pdf"
+   target="_blank"
+   download
+   class="btn">
+   Download Resume
+</a>
+</a>
+    </div>
+</div>
+
+<section id="about" class="outer-box">
+<h2>About Me</h2>
+<p>
+I am a pre-final year Artificial Intelligence and Data Science student with a strong passion for technology and continuous learning.
+I have hands-on experience in Python, HTML, and CSS, enabling me to build structured and visually engaging applications.
+I enjoy transforming ideas into functional projects that solve real-world problems.
+With a curious mindset, I continuously explore new technologies to strengthen my technical foundation.
+I aim to grow as a skilled developer while contributing innovative and impactful solutions.
+</p>
+</section>
+
+<section id="education" class="outer-box">
+<h2>Education</h2>
+<div class="card" data-tooltip="B.Tech in AI & DS">B.Tech – Artificial Intelligence & Data Science</div>
+<div class="card" data-tooltip="Achariya College of Engineering, Puducherry">Achariya College of Engineering Technology, Puducherry</div>
+<div class="card" data-tooltip="Current CGPA 8.5">CGPA: 8.5</div>
+</section>
+
+<section id="skills" class="outer-box">
+<h2>Technical Skills</h2>
+<div class="card" data-tooltip="Programming in Python">Python</div>
+<div class="card" data-tooltip="Web development using HTML">HTML</div>
+<div class="card" data-tooltip="Styling with CSS">CSS</div>
+<div class="card" data-tooltip="Interactive web with JavaScript">JavaScript</div>
+<div class="card" data-tooltip="Object-Oriented Programming in Java">Java</div>
+</section>
+
+<section id="tools" class="outer-box">
+<h2>Tools</h2>
+<div class="card" data-tooltip="AI-powered brainstorming tool">Napkin AI</div>
+<div class="card" data-tooltip="UI/UX collaboration tool">Stitch</div>
+<div class="card" data-tooltip="Version control system">Git</div>
+<div class="card" data-tooltip="Code hosting platform">GitHub</div>
+<div class="card" data-tooltip="Robotic Process Automation using UiPath">RPA – UiPath</div>
+<div class="card" data-tooltip="UI/UX Design Tool">Figma</div>
+<div class="card" data-tooltip="Code editor for development">Visual Studio Code</div>
+<div class="card" data-tooltip="Canva for Designing">Canva </div>
+
+</section>
+
+<section id="projects" class="outer-box">
+<h2>Projects</h2>
+<div class="card" data-tooltip="Intelligent AI Chatbot System">AI Chatbot</div>
+<div class="card" data-tooltip="Fingerprint-based Biometric Authentication">Fingerprint Unlocking System</div>
+</section>
+
+<section id="experience" class="outer-box">
+<h2>Intership Experience</h2>
+<div class="card" data-tooltip="Web Development Internship at Twilight IT Solutions, 2025">
+Web Development Intern – Twilight IT Solutions – 2025
+</div>
+<div class="card" data-tooltip="Frontend Development Internship at Ignite Labs, 2026">
+Frontend Development Intern – Ignite Labs – 2026
+</div>
+</section>
+<!-- CERTIFICATES SECTION -->
+<section id="certificates" class="outer-box">
+<h2>Certificates</h2>
+
+
+<div class="card" data-tooltip="RPA Certification from UiPath">
+Automation Developer Associate – UiPath 
+<br><br>    
+<button class="view-btn" onclick="openModal('uipath.jpg')">
+View Certificate
+</button>
+</div>
+
+<div class="card" data-tooltip=" certified in AI fundamentals with IBM">
+Getting Started with AI – IBM
+<br><br>
+<button class="view-btn" onclick="openModal('ibm_ai.jpg')">
+View Certificate
+</button>
+</div>
+
+<div class="card" data-tooltip="digital productivity with AI certification from P2E Skills">
+Digital Productivity with AI – P2E Skills
+<br><br>
+<button class="view-btn" onclick="openModal('digital_productivity.jpg')">
+View Certificate
+</button>
+</div>
+
+<div class="card" data-tooltip="Python Programming Certification">
+Python 
+</div>
+
+<div class="card" data-tooltip="C and C++ Programming Certification">
+C / C++ 
+</div>
+
+<div class="card" data-tooltip="Java Programming Certification">
+Java 
+</div>
+</section>
+
+<!-- MODAL -->
+<div id="certificateModal" class="modal">
+<span class="close" onclick="closeModal()">&times;</span>
+<img id="certificateImage">
+</div>
+
+<script>
+function openModal(file){
+    document.getElementById("certificateImage").src = file;
+    document.getElementById("certificateModal").style.display = "flex";
+}
+
+function closeModal(){
+    document.getElementById("certificateModal").style.display = "none";
+}
+</script>
+
+</section>
+<section id="contact" class="outer-box">
+<h2>Contact</h2>
+<div class="card" data-tooltip="Send me an email">Email: mohanamahalakshmi1125@gmail.com</div>
+<div class="card" data-tooltip="Call me">Phone: 9080668996</div>
+</section>
+
+<footer>
+© 2026 Mohana Mahalakshmi | Portfolio
+</footer>
+<script>
+const canvas = document.getElementById("stars-canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+let planets = [];
+let mouse = { x: null, y: null };
+let numStars = 250;
+
+window.addEventListener("mousemove", (e)=>{
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
+
+class Star {
+    constructor(){
+        this.reset();
+        this.opacity = Math.random();
+        this.twinkleSpeed = 0.01 + Math.random() * 0.02;
+        this.depth = Math.random() * 2;
+    }
+
+    reset(){
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2;
+        this.speed = 0.2 + Math.random() * 0.5;
+    }
+
+    update(){
+        this.y += this.speed * this.depth;
+
+        // Twinkle
+        this.opacity += this.twinkleSpeed;
+        if(this.opacity >= 1 || this.opacity <= 0){
+            this.twinkleSpeed *= -1;
+        }
+
+        // Mouse interaction
+        if(mouse.x){
+            let dx = this.x - mouse.x;
+            let dy = this.y - mouse.y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+
+            if(distance < 120){
+                this.x += dx / 20;
+                this.y += dy / 20;
+            }
+        }
+
+        if(this.y > canvas.height){
+            this.reset();
+            this.y = 0;
+        }
+    }
+
+    draw(){
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = "#c77dff";
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = "#9d4edd";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+class Planet {
+    constructor(x,y,r,color){
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.color = color;
+        this.angle = 0;
+    }
+
+    update(){
+        this.angle += 0.002;
+        this.x += Math.sin(this.angle) * 0.3;
+    }
+
+    draw(){
+        ctx.save();
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+function createNebula(){
+    const gradient = ctx.createRadialGradient(
+        canvas.width/2, canvas.height/2, 100,
+        canvas.width/2, canvas.height/2, canvas.width
+    );
+    gradient.addColorStop(0, "rgba(157,78,221,0.15)");
+    gradient.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+
+function init(){
+    stars = [];
+    planets = [];
+
+    for(let i=0;i<numStars;i++){
+        stars.push(new Star());
+    }
+
+    planets.push(new Planet(200,150,40,"#9d4edd"));
+    planets.push(new Planet(canvas.width-250,300,60,"#5a189a"));
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    createNebula();
+
+    stars.forEach(star=>{
+        star.update();
+        star.draw();
+    });
+
+    planets.forEach(p=>{
+        p.update();
+        p.draw();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();
+
+window.addEventListener("resize", ()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+</script>
+</body>
+</html>       
